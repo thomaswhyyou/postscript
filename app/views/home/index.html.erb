@@ -1,0 +1,14 @@
+<h3>Home</h3>
+
+All registered users:
+<% @users.each do |user| %>
+  <p>User: <%=link_to user.name, user %></p>
+<% end %>
+
+Currently signed_in users:
+<% @signed_in_users.each do |user| %>
+  <p>User: <%=link_to user.name, user %></p>
+<% end %>
+
+
+
