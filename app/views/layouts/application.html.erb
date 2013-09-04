@@ -10,12 +10,13 @@
   <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
 </head>
 
-<body>
+<body style='padding-top: 50px'>
 
 
+  <%= render partial: 'layouts/navigation' %>
   <%= render partial: 'layouts/messages' %>
+  <%= yield %>
 
-    <%= yield %>
   <div class='container'>
     <%= render partial: 'layouts/footer' %>
   </div>

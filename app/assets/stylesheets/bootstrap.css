@@ -602,7 +602,7 @@ address {
   font-style: normal;
   line-height: 1.428571429;
 }
-code,
+/*code,
 pre {
   font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
 }
@@ -641,7 +641,7 @@ pre code {
 .pre-scrollable {
   max-height: 340px;
   overflow-y: scroll;
-}
+}*/
 .container {
   margin-right: auto;
   margin-left: auto;
