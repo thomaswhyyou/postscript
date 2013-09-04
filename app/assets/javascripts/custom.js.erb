@@ -1,0 +1,27 @@
+
+/////////////////////////////////////////////////////////////////////////////////
+// PUSHER SETTING
+/////////////////////////////////////////////////////////////////////////////////
+
+// NOTE: pusher object is defined in application.html.erb
+
+// var pusher = {
+//   // keycode: "'" + <%= ENV['PUSHER_KEY'].to_s %> + "'",
+//   pusher_agent: new Pusher('c0a1d86c10d9462f9f08'),
+//   subscribed_channel: ""
+// };
+
+// pusher.keycode = "'" + <%= ENV['PUSHER_KEY'].to_s %> + "'";
+// pusher.object = new Pusher(keycode);
+// pusher.pusher_agent = new Pusher('c0a1d86c10d9462f9f08');
+// pusher.subscribed_channel = '';
+
+pusher.establish_channel = function() {
+  var current_channel_name = $('#channel_name').text();  // .replace(/^\s+|\s+$/g, "");
+  this.subscribed_channel = this.pusher_agent.subscribe("presence-" + current_channel_name);
+
+  //  BIND SUBSCRIBED_CHANNEL TO EVENTS
+  this.subscribed_channel.bind('sample_event', function(data) {
+    alert(data.message);
+  });
+};

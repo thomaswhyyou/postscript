@@ -1,8 +1,6 @@
 
 
-
-
-<p>You are currently at: <%= @channel_name %></p>
+<h6>You are currently at: <span id='channel_name'><%= @channel_name %></span></h6>
 
 <div class="row row-offcanvas row-offcanvas-right active">
 
@@ -27,24 +25,24 @@
     </p>
 
     <div>
-      <p>Here's where you enter message</p>
-      <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
+      <p>Here's where you enter message:</p><button>Send Msg</button>
+
+      <%= text_area(:chat, :message, class: 'form-control') %>
     </div>
 
     <hr>
+
     <div class="row">
       <div class="col-12 col-sm-12 col-lg-12">
-        <div class="col-1 col-sm-1 col-lg-1">
+        <div class="col-2 col-sm-2 col-lg-2">
           name
         </div>
-        <div class="col-11 col-sm-11 col-lg-11">
+        <div class="col-10 col-sm-10 col-lg-10">
           <pre><code>asdf
             asdf
-            </code></pre>
-          <p>as;dlfjkads;kfj</p>
+          </code></pre>
         </div>
       </div><!--/span-->
-
     </div><!--/row-->
   </div><!--/span-->
 
@@ -66,4 +64,21 @@
 </div><!--/row-->
 
 <hr>
+
+
+<script type="text/javascript">
+  $(function() {
+    // var blahblah = $('#channel_name').text()
+    pusher.establish_channel();
+    console.log('js script loading');
+  });
+
+  // Enable pusher logging - don't include this in production
+  Pusher.log = function(message) {
+    if (window.console && window.console.log) {
+      window.console.log(message);
+    }
+  };
+</script>
+
 

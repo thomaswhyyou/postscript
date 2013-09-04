@@ -3,6 +3,7 @@ Postscript::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :sessions => "sessions" }
   resources :users
 
+  post '/pusher/auth', to: 'pusher#auth'
   get '/:channel_name', to: 'home#channel'
   # get '/lounge',                to: 'channels#lounge', as: 'lounge'
 

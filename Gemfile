@@ -17,6 +17,7 @@ gem "devise"
 
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'pusher'
 
 group :development, :test do
   gem 'dotenv-rails'
