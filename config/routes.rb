@@ -3,6 +3,9 @@ Postscript::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :sessions => "sessions" }
   resources :users
 
+  get '/:channel_name', to: 'home#channel'
+  # get '/lounge',                to: 'channels#lounge', as: 'lounge'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -6,19 +6,23 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+  <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
 </head>
 
 <body>
-  <header>
-   <%= render partial: 'layouts/messages' %>
-  </header>
 
-  <%= yield %>
 
-  <footer>
-    <p class="pull-right"><a href="#">Back to top</a></p>
-    <p>© 2013 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
-  </footer>
+  <%= render partial: 'layouts/messages' %>
 
+    <%= yield %>
+  <div class='container'>
+    <%= render partial: 'layouts/footer' %>
+  </div>
+
+  <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>
+
+
+<!-- <%= render partial: 'layouts/navigation' %> -->

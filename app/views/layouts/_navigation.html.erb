@@ -1,0 +1,41 @@
+<div class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to '<PostScript/>', root_path, class: 'navbar-brand' %>
+    </div>
+
+    <div class="navbar-collapse collapse" style="height: 1px;">
+
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class='navbar-right'>
+        <% if user_signed_in? %>
+          <%= link_to(edit_user_registration_path) do %>
+            <icon class='icon-tools'></icon>
+          <% end %>
+
+          <%= link_to(destroy_user_session_path, method: 'delete') do %>
+            <icon class='icon-logout'></icon>
+            <!-- <span class='glyphicon glyphicon-comment'></span> -->
+          <% end %>
+
+        <% else %>
+          <%= link_to(user_omniauth_authorize_path(:github), class: 'btn btn-default') do %>
+            <span>Sign in</span>
+            <icon class='icon-github'></icon>
+          <% end %>
+        <% end %>
+      </div>
+
+    </div><!--/.navbar-collapse -->
+  </div>
+</div>
