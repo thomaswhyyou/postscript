@@ -7,13 +7,18 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
   <header>
-   <%= render partial: 'layouts/navigation' %>
    <%= render partial: 'layouts/messages' %>
- </header>
+  </header>
 
   <%= yield %>
+
+  <footer>
+    <p class="pull-right"><a href="#">Back to top</a></p>
+    <p>© 2013 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+  </footer>
 
 </body>
 </html>
