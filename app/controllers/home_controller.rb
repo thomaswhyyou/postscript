@@ -9,8 +9,9 @@ class HomeController < ApplicationController
   end
 
   def channel
-    @message_types = ['text', 'code']
-    @channel_name = params[:channel_name]
+    # @message_types = ['text', 'code']
+    @channel_name = params[:channel_name] ||= 'Lounge'
+    @all_channels = Channel.all
   end
 
 end

@@ -6,7 +6,7 @@ Postscript::Application.routes.draw do
 
   post '/pusher/auth',      to: 'pusher#auth'
   get '/lounge',            to: 'home#channel', as: 'lounge'
-  get '/channel/:channel_name',     to: 'home#channel'
+  get '/lounge/:channel_name',     to: 'home#channel'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
