@@ -15,21 +15,21 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href='/' class='navbar_menu'>Signed in::<%= current_user.name.upcase %></a>
+            <a href='/' class='icon_menu'>Signed in::<%= current_user.name.upcase %></a>
           </li>
 
           <li>
-            <a href='/' class='navbar_menu'><icon class='icon-window'></icon></a>
+            <a href='/' class='icon_menu'><icon class='icon-window'></icon></a>
           </li>
 
           <li>
-            <%= link_to(edit_user_registration_path, class: 'navbar_menu') do %>
+            <%= link_to(edit_user_registration_path, class: 'icon_menu') do %>
               <icon class='icon-tools'></icon>
             <% end %>
           </li>
 
           <li>
-            <%= link_to(destroy_user_session_path, class: 'navbar_menu', method: 'delete') do %>
+            <%= link_to(destroy_user_session_path, class: 'icon_menu', method: 'delete') do %>
               <icon class='icon-logout'></icon>
             <% end %>
           </li>

@@ -50,20 +50,24 @@
     <hr>
 
     <div class='row' id='channel_wrapper'>
-      <div class="col-12 col-sm-12 col-lg-12">
+      <div id='message_board'>
 
-        <div class="col-sm-2">
-          me
+        <div class="row col-sm-12">
+          <div class="col-sm-2">
+            me
+          </div>
+
+          <div class="col-sm-9">
+            Hello
+          </div>
+
+          <div class="col-sm-1">
+            1:12pm
+          </div>
         </div>
 
-        <div class="col-sm-9 ">
-          Hello
-        </div>
 
-        <div class="col-sm-1">
-          1:12pm
-        </div>
-      </div><!--/span-->
+      </div>
     </div>
 
     <hr>
@@ -71,15 +75,13 @@
     <div class='row'>
       <div class='col-sm-10'>
         <%= text_area(:message, :box, class: 'form-control', placeholder: 'Say something!', autofocus: 'true') %>
+        <div style='color: grey'>
+          <span class="label label-default">Tip</span>
+          Press 'shift + enter' for code block, or 'alt + enter' move to a new line.
+        </div>
       </div>
 
       <div class='col-sm-2'>
-        <!-- <select class="form-control"><option>button1</option></select> -->
-
-        <label class='checkbox-inline'>
-          <input type="checkbox" id="inlineCheckbox1" value="option1">Code?
-        </label>
-
         <div class='btn btn-default btn-block' id='send_button'>Send!</div>
       </div>
 
@@ -123,9 +125,35 @@
       lookup_msg_box();
     });
 
+    $("#message_box").keypress(function(event) {
+      if (event.which === 13) {
+        if ($('#message_box').val().trim() !== "") {
+          if (event.altKey === true) {
+            console.log('msg is not done yet. Do nothing');
+            return
+          }
 
+          if (event.shiftKey === true) {
+            console.log('this is code block');
+            clear_text_box();
+          } else {
+            console.log('this is regular msg')
+            clear_text_box();
+          }
+        } else {
+          console.log('there is no text. Do nothing');
+          event.preventDefault();
+        }
+      } else {
+        console.log('something else was pressed')
+      }
+    });
 
-    console.log('js script loading');
+    var clear_text_box = function() {
+      event.preventDefault();
+      $('#message_box').val('');
+    }
+
 
   });
 

@@ -17,6 +17,7 @@
 // pusher.pusher_agent = new Pusher('c0a1d86c10d9462f9f08');
 // pusher.subscribed_channel = '';
 
+
 pusher.establish_channel = function() {
   var current_channel_name = $('#channel_name').text();  // .replace(/^\s+|\s+$/g, "");
   this.subscribed_channel = this.pusher_agent.subscribe("presence-" + current_channel_name);
@@ -25,6 +26,28 @@ pusher.establish_channel = function() {
   this.subscribed_channel.bind('sample_event', function(data) {
     alert(data.message);
   });
+};
+
+
+/////////////////////////////////////////////////////////////////////////////////
+// CHATROOM ACTIONS
+/////////////////////////////////////////////////////////////////////////////////
+
+var chatroom = {};
+
+chatroom.display_msg = function() {
+  $('<div class="row col-sm-12"><div class="col-sm-2">' + 'me2' +
+    '</div><div class="col-sm-9">' + 'new msg' +
+    '</div><div class="col-sm-1">' + 'time2' +
+    '</div></div>').appendTo($('#message_board'));
+
+  // $('<div class="col-sm-2">'+'me2'+'</div>').appendTo($('#message_board'));
+  // $('<div class="col-sm-9">'+'new msg'+'</div>').appendTo('<div class="col-sm-2">'+'me2'+'</div>');
+  // $('<div class="col-sm-1">'+'time'+'</div>').appendTo('<div class="col-sm-2">'+'me2'+'</div>');
+
+  // $('#message_board').appendTo('<div class="col-sm-2">'+'me2'+'</div>');
+  // $('#message_board').appendTo('<div class="col-sm-9">'+'new msg'+'</div>');
+  // $('#message_board').appendTo('<div class="col-sm-1">'+'time'+'</div>');
 };
 
 
