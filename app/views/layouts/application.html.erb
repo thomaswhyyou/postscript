@@ -17,10 +17,9 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body style='padding-top: 50px'>
+<body>
 
   <%= render partial: 'layouts/navigation' %>
-  <%= render partial: 'layouts/messages' %>
   <%= yield %>
 
   <div class='container'>
@@ -31,7 +30,6 @@
 </html>
 
 
-<!-- <%= render partial: 'layouts/navigation' %> -->
 <!-- <script>hljs.initHighlightingOnLoad();</script> -->
 <!-- <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css"> -->
 <!-- <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script> -->

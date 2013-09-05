@@ -1,9 +1,35 @@
-@font-face { font-family: "entypo"; font-style: normal; font-weight: 400; src: url("icons/entypo.eot"); src: url("icons/entypo.eot?#iefix") format("icons/ie9-skip-eot"), url("icons/entypo.woff") format("woff"), url("icons/entypo.ttf") format("truetype"); }
+@font-face {
+  font-family: "entypo";
+  font-style: normal;
+  font-weight: 400;
+  src: url("icons/entypo.eot");
+  src: url("icons/entypo.eot?#iefix") format("icons/ie9-skip-eot"),
+  url("icons/entypo.woff") format("woff"),
+  url("icons/entypo.ttf") format("truetype");
+}
 
 /* Icons */
-[class^="icon-"] a:before, [class*=" icon-"] a:before, [class^="icon-"] a:after, [class*=" icon-"] a:after, icon[class^="icon-"], icon[class*=" icon-"] { font-family: "entypo"; position: absolute; text-decoration: none; zoom: 1; }
+[class^="icon-"] a:before,
+[class*=" icon-"] a:before,
+[class^="icon-"] a:after,
+[class*=" icon-"] a:after,
+icon[class^="icon-"],
+icon[class*=" icon-"] {
+  font-family: "entypo";
+  position: absolute;
+  text-decoration: none;
+  zoom: 1;
+  font-size: 140%;
+}
 
-icon[class^="icon-"], icon[class*=" icon-"] { display: inline-block; position: static; min-width: 20px; margin: 0 5px; text-align: center; }
+icon[class^="icon-"],
+icon[class*=" icon-"] {
+  display: inline-block;
+  position: static;
+  min-width: 20px;
+  margin: 0 3px;
+  text-align: center;
+}
 
 .icon-note.icon-left a:before, .icon-note.icon-right a:after { content: "\266a"; height: inherit; }
 
