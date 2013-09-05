@@ -23,9 +23,11 @@ pusher.establish_channel = function() {
   this.subscribed_channel = this.pusher_agent.subscribe("presence-" + current_channel_name);
 
   //  BIND SUBSCRIBED_CHANNEL TO EVENTS
-  this.subscribed_channel.bind('sample_event', function(data) {
-    alert(data.message);
+  this.subscribed_channel.bind('display_msg', function(data) {
+    console.log(data);
+    chatroom.display_msg(data.msg_sender, data.msg_content, data.msg_timestamp);
   });
+
 };
 
 
@@ -35,19 +37,28 @@ pusher.establish_channel = function() {
 
 var chatroom = {};
 
-chatroom.display_msg = function() {
-  $('<div class="row col-sm-12"><div class="col-sm-2">' + 'me2' +
-    '</div><div class="col-sm-9">' + 'new msg' +
-    '</div><div class="col-sm-1">' + 'time2' +
+chatroom.display_msg = function(sender, msg, time) {
+  $('<div class="row col-sm-12"><div class="col-sm-2">' + sender +
+    '</div><div class="col-sm-9">' + msg +
+    '</div><div class="col-sm-1">' + time +
     '</div></div>').appendTo($('#message_board'));
+};
 
-  // $('<div class="col-sm-2">'+'me2'+'</div>').appendTo($('#message_board'));
-  // $('<div class="col-sm-9">'+'new msg'+'</div>').appendTo('<div class="col-sm-2">'+'me2'+'</div>');
-  // $('<div class="col-sm-1">'+'time'+'</div>').appendTo('<div class="col-sm-2">'+'me2'+'</div>');
+chatroom.send_msg = function(type, content) {
+  var target_channel = pusher.subscribed_channel.name;
+  var msg_sender = 'me';
+  var msg_type = type;
+  var msg_content = content;
 
-  // $('#message_board').appendTo('<div class="col-sm-2">'+'me2'+'</div>');
-  // $('#message_board').appendTo('<div class="col-sm-9">'+'new msg'+'</div>');
-  // $('#message_board').appendTo('<div class="col-sm-1">'+'time'+'</div>');
+  $.ajax({
+    url: "/chatroom/broadcast",
+    type: "post",
+    dataType: "json",
+    data: {"target_channel":  target_channel,
+           "msg_sender":      msg_sender,
+           "msg_type":        msg_type,
+           "msg_content":     msg_content}
+  });
 };
 
 

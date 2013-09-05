@@ -76,13 +76,13 @@
       <div class='col-sm-10'>
         <%= text_area(:message, :box, class: 'form-control', placeholder: 'Say something!', autofocus: 'true') %>
         <div style='color: grey'>
-          <span class="label label-default">Tip</span>
+          <span class="label label-primary">Tip</span>
           Press 'shift + enter' for code block, or 'alt + enter' move to a new line.
         </div>
       </div>
 
       <div class='col-sm-2'>
-        <div class='btn btn-default btn-block' id='send_button'>Send!</div>
+        <div class='btn btn-default btn-block' id='send_button'>Beam it up!</div>
       </div>
 
 
@@ -126,8 +126,10 @@
     });
 
     $("#message_box").keypress(function(event) {
+      var message_box_content = $('#message_box').val();
+
       if (event.which === 13) {
-        if ($('#message_box').val().trim() !== "") {
+        if (message_box_content.trim() !== "") {
           if (event.altKey === true) {
             console.log('msg is not done yet. Do nothing');
             return
@@ -138,6 +140,7 @@
             clear_text_box();
           } else {
             console.log('this is regular msg')
+            chatroom.send_msg('text', message_box_content);
             clear_text_box();
           }
         } else {
