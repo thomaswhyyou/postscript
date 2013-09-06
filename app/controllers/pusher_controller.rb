@@ -5,7 +5,7 @@ class PusherController < ApplicationController
     if current_user
       response = Pusher[params[:channel_name]].authenticate(params[:socket_id], {
         user_id: current_user.id.to_s,
-        name: current_user.name
+        user_info: { name: current_user.name }
       })
       render :json => response
     else

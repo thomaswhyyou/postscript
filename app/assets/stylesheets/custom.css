@@ -19,6 +19,7 @@ body {
   /*padding-left: 20px;*/
   /*padding-right: 20px;*/
   vertical-align: bottom;
+  overflow-y: auto;
 }
 
 .left_sidebar {
@@ -26,7 +27,17 @@ body {
   border: 1px;
   border-color: #e3e3e3;
   border-right-style: solid;
+  height: 580px;
 }
+
+.right_sidebar {
+  padding: 20px 0 0 5px;
+  border: 1px;
+  border-color: #e3e3e3;
+  border-left-style: solid;
+  height: 580px;
+}
+
 
 .de_emphasized {
   color: lightgrey;
