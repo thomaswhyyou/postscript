@@ -10,8 +10,10 @@ class HomeController < ApplicationController
 
   def channel
     # @message_types = ['text', 'code']
-    @channel_name = params[:channel_name] ||= 'Lounge'
+    @channel_name = params[:channel_name] ||= 'lounge'
     @all_channels = Channel.all
+    @pusher_key = '\'' + ENV['PUSHER_KEY'].to_s + '\''
+    # binding.pry
   end
 
 end

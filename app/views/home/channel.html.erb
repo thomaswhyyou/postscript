@@ -1,3 +1,47 @@
+<!-- <script src="http://js.pusher.com/2.1/pusher.min.js" type="text/javascript"></script> -->
+<script type="text/javascript">
+
+  // var pusher = {
+    // pusher_agent: new Pusher(<%= @pusher_key %>),
+    // subscribed_channel: ""
+  // };
+
+  pusher.establish_channel = function() {
+    var current_channel_name = $('#channel_name').text();  // .replace(/^\s+|\s+$/g, "");
+    this.subscribed_channel = this.pusher_agent.subscribe("presence-" + current_channel_name);
+
+    this.subscribed_channel.bind('display_msg', function(data) {
+      console.log(data);
+      chatroom.display_msg(data.msg_sender, data.msg_content, data.msg_timestamp);
+    });
+  };
+
+  var chatroom = {};
+
+  chatroom.display_msg = function(sender, msg, time) {
+    $('<div class="row col-sm-12"><div class="col-sm-2">' + sender +
+      '</div><div class="col-sm-9">' + msg +
+      '</div><div class="col-sm-1">' + time +
+      '</div></div>').appendTo($('#message_board'));
+  };
+
+  chatroom.send_msg = function(type, content) {
+    var target_channel = pusher.subscribed_channel.name;
+    var msg_sender = 'me';
+    var msg_type = type;
+    var msg_content = content;
+
+    $.ajax({
+      url: "/chatroom/broadcast",
+      type: "post",
+      dataType: "json",
+      data: {"target_channel":  target_channel,
+             "msg_sender":      msg_sender,
+             "msg_type":        msg_type,
+             "msg_content":     msg_content}
+    });
+  };
+</script>
 
 <div class='container'>
 <div class="row row-offcanvas row-offcanvas-right">
