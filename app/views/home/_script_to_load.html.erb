@@ -107,7 +107,7 @@
   };
 
   chatroom.scrolldown = function() {
-    var channel_wrapper_height = $('#channel_wrapper').height();
+    var channel_wrapper_height = $('#channel_wrapper')[0].scrollHeight;
     $('#channel_wrapper').animate({ scrollTop: channel_wrapper_height },'slow');
   };
 
