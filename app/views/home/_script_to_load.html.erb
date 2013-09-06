@@ -56,8 +56,6 @@
 
   chatroom.send_msg = function(content) {
     var target_channel = pusher.subscribed_channel.name;
-    var msg_sender = 'me';
-    // var msg_type = type;
     var msg_content = content;
 
     $.ajax({
@@ -65,9 +63,19 @@
       type: "post",
       dataType: "json",
       data: {"target_channel":  target_channel,
-             "msg_sender":      msg_sender,
-             // "msg_type":        msg_type,
              "msg_content":     msg_content}
     });
   };
+
+  chatroom.gethistory = function() {
+    var current_channel_name = $('#channel_name').text();
+
+    $.ajax({
+      url: "/chatroom/gethistory",
+      type: "post",
+      dataType: "json",
+      data: {"target_channel_noprefix":  current_channel_name}
+    });
+  }
+
 </script>

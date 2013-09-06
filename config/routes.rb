@@ -9,6 +9,7 @@ Postscript::Application.routes.draw do
   get '/lounge/:channel_name',     to: 'home#channel'
 
   post '/chatroom/broadcast', to: 'chatroom#broadcast'
+  post '/chatroom/gethistory', to: 'chatroom#gethistory'
 
 end
 

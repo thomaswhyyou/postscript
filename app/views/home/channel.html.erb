@@ -37,14 +37,15 @@
   </div>
 
 
-  <div class="col-xs-9 col-sm-7">
+  <div class="col-xs-9 col-sm-7 top_padding_20">
     <p class="pull-right visible-xs">
       <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
     </p>
 
     <div class='row'>
       <div class="col-sm-12">
-        <h6>You are currently at > <span id='channel_name'><%= @channel_name %></span></h6>
+        <p><%= render partial: 'layouts/messages' %></p>
+        <p>You are currently at &gt; <span class="label label-default" id='channel_name'><%= @channel_name.titleize %></span></p>
       </div>
     </div>
 
@@ -52,22 +53,6 @@
 
     <div class='row' id='channel_wrapper'>
       <div class='col-sm-12' id='message_board'>
-
-        <div class="row col-sm-12">
-          <div class="col-sm-2">
-            me
-          </div>
-
-          <div class="col-sm-9">
-            Hello
-          </div>
-
-          <div class="col-sm-1">
-            1:12pm
-          </div>
-        </div>
-
-
       </div>
     </div>
 
@@ -160,6 +145,7 @@
       };
     });
 
+    chatroom.gethistory();
   });
 
   // Enable pusher logging - don't include this in production
