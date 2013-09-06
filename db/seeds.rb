@@ -8,22 +8,22 @@
 User.create! :name => 'First User', :email => 'user@example.com', :password => 'bitchplease', :password_confirmation => 'bitchplease'
 User.create! :name => 'Second User', :email => 'user2@example.com', :password => 'bitchplease', :password_confirmation => 'bitchplease'
 
-channel1 = Channel.create! channel_name: 'wdi6-nyc'
-channel2 = Channel.create! channel_name: 'wdi7-nyc'
+# channel1 = Channel.create! channel_name: 'wdi6-nyc'
+# channel2 = Channel.create! channel_name: 'wdi7-nyc'
 channel3 = Channel.create! channel_name: 'lounge'
 
-channel1.feeds.create(sender: 'ghose user', content: 'Test message 1!')
-channel1.feeds.create(sender: 'naked fish', content: 'Test message 2!')
+channel1.feeds.create(sender: 'testuser', content: 'Test message 1!')
+channel1.feeds.create(sender: 'testuser', content: 'Test message 2!')
 
-channel3.feeds.create(sender: 'stupid bear', content: 'Test message 1!')
-channel3.feeds.create(sender: 'lazy eyes', content: 'Test message 2!')
-channel3.feeds.create(sender: 'horny duck', content: 'Test message 4!')
-channel3.feeds.create(sender: 'horny duck', content: 'Test message 5!')
-channel3.feeds.create(sender: 'horny duck', content: 'Test message 6!')
-channel3.feeds.create(sender: 'horny duck', content: 'Test message 7!')
-channel3.feeds.create(sender: 'horny duck', content: 'Test message 8!')
-channel3.feeds.create(sender: 'horny duck', content: 'Test message 9!')
-channel3.feeds.create(sender: 'horny duck', content: 'Test message 10!')
-channel3.feeds.create(sender: 'horny duck', content: 'Test message 11!')
-channel3.feeds.create(sender: 'horny duck', content: 'Test message 12!')
-channel3.feeds.create(sender: 'horny duck', content: 'Test message 13!')
+channel3.feeds.create(sender: 'testuser', content: 'Test message 1!')
+channel3.feeds.create(sender: 'testuser', content: 'Test message 2!')
+channel3.feeds.create(sender: 'testuser', content: 'Test message 4!')
+channel3.feeds.create(sender: 'testuser', content: 'Test message 5!')
+channel3.feeds.create(sender: 'testuser', content: 'Test message 6!')
+channel3.feeds.create(sender: 'testuser', content: 'Test message 7!')
+channel3.feeds.create(sender: 'testuser', content: 'Test message 8!')
+channel3.feeds.create(sender: 'testuser', content: 'Test message 9!')
+channel3.feeds.create(sender: 'testuser', content: 'Test message 10!')
+channel3.feeds.create(sender: 'testuser', content: 'Test message 11!')
+channel3.feeds.create(sender: 'testuser', content: 'Test message 12!')
+channel3.feeds.create(sender: 'testuser', content: 'Test message 13!')
