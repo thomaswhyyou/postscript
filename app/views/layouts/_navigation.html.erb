@@ -19,17 +19,19 @@
           </li>
 
           <li>
-            <a href='/' class='icon_menu'><icon class='icon-window'></icon></a>
+            <%= link_to('/', :data => { toggle: 'tooltip', title: 'New channel', placement: 'bottom' }, class: 'icon_menu', id: 'new_channel_icon') do %>
+              <icon class='icon-window'></icon>
+            <% end %>
           </li>
 
           <li>
-            <%= link_to(edit_user_registration_path, class: 'icon_menu') do %>
+            <%= link_to(edit_user_registration_path, :data => { toggle: 'tooltip', title: 'Edit setting', placement: 'bottom' }, class: 'icon_menu', id: 'edit_setting_icon') do %>
               <icon class='icon-tools'></icon>
             <% end %>
           </li>
 
           <li>
-            <%= link_to(destroy_user_session_path, class: 'icon_menu', method: 'delete') do %>
+            <%= link_to(destroy_user_session_path, :data => { toggle: 'tooltip', title: 'Sign out', placement: 'bottom' }, class: 'icon_menu', id: 'signout_icon', method: 'delete') do %>
               <icon class='icon-logout'></icon>
             <% end %>
           </li>

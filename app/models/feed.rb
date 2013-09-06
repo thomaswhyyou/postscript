@@ -2,7 +2,6 @@ class Feed
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :type,      type: String
   field :time_sent, type: Time
   field :from_user, type: String
   field :message,   type: String

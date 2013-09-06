@@ -51,7 +51,7 @@
     <hr>
 
     <div class='row' id='channel_wrapper'>
-      <div id='message_board'>
+      <div class='col-sm-12' id='message_board'>
 
         <div class="row col-sm-12">
           <div class="col-sm-2">
@@ -74,7 +74,7 @@
     <hr>
 
     <div class='row'>
-      <div class='col-sm-10'>
+      <div class='col-sm-11'>
         <%= text_area(:message, :box, class: 'form-control', placeholder: 'Say something!', autofocus: 'true') %>
         <div style='color: grey'>
           <span class="label label-primary">Tip</span>
@@ -82,10 +82,9 @@
         </div>
       </div>
 
-      <div class='col-sm-2'>
-        <div class='btn btn-default btn-block' id='send_button'>Beam it up!</div>
+      <div class='col-sm-1'>
+        <div class='btn btn-default' id='send_button' data-toggle='tooltip' data-title='Only for text!', data-placement='bottom'>SEND</div>
       </div>
-
 
     </div>
 
@@ -112,52 +111,54 @@
 
 <script type="text/javascript">
   $(function() {
-    // var blahblah = $('#channel_name').text()
     pusher.establish_channel();
 
-    var lookup_msg_box = function() {
-      var message_box_msg = $('#message_box').val();
-      alert(message_box_msg);
-    }
-
-    $('#send_button').click(function() {
-      // var message_box_msg = $('#message_box').val();
-      // alert(message_box_msg);
-      lookup_msg_box();
+    // FOR SENDING TEXT MSG VIA CLICKING THE BUTTON
+    $('#send_button').click(function(event) {
+      var msg_content = chatroom.capture_msg();
+      chatroom.send_msg(msg_content);
+      chatroom.clear_msg_box();
     });
 
+    // FOR SENDING TEXT MSG OR CODE BLOCK VIA HITTING ENTER COMBINATIONS
     $("#message_box").keypress(function(event) {
-      var message_box_content = $('#message_box').val();
+      var msg_content = chatroom.capture_msg();
+      var code_wrapped;
 
-      if (event.which === 13) {
-        if (message_box_content.trim() !== "") {
-          if (event.altKey === true) {
-            console.log('msg is not done yet. Do nothing');
-            return
+      if (event.which === 13) {                       // enter was pressed
+        if (msg_content.trim() !== "") {              // the textarea wasn't blank
+          if (event.altKey === true) { return; }      // but alt key was pressed to move to a new line; do nothing
+          if (event.shiftKey === true) {              // or shift key was pressed therefore code block
+            code_wrapped = "<code>" + msg_content + "</code>";
+            chatroom.send_msg(code_wrapped);
+            chatroom.clear_msg_box();
+          } else {                                    // just enter therefore this is a text message
+            chatroom.send_msg(msg_content);
+            chatroom.clear_msg_box();
           }
-
-          if (event.shiftKey === true) {
-            console.log('this is code block');
-            clear_text_box();
-          } else {
-            console.log('this is regular msg')
-            chatroom.send_msg('text', message_box_content);
-            clear_text_box();
-          }
-        } else {
-          console.log('there is no text. Do nothing');
-          event.preventDefault();
+        } else {                                      // enter was pressed but textarea was blank
+          chatroom.clear_msg_box();
         }
-      } else {
-        console.log('something else was pressed')
       }
     });
 
-    var clear_text_box = function() {
-      event.preventDefault();
-      $('#message_box').val('');
-    }
+    $("#message_box").keydown(function(event) {
+      if (event.which === 9) {                        // this overrides default TAP functionality
+        console.log(event);
+        event.preventDefault();
+        var start = $(this).get(0).selectionStart;
+        var end = $(this).get(0).selectionEnd;
 
+        // set textarea value to: text before caret + tab + text after caret
+        $(this).val($(this).val().substring(0, start)
+                    + "\t"
+                    + $(this).val().substring(end));
+
+        // put caret at right position again
+        $(this).get(0).selectionStart =
+        $(this).get(0).selectionEnd = start + 1;
+      };
+    });
 
   });
 

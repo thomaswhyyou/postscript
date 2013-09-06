@@ -73,16 +73,16 @@ mark {
   background: #ff0;
   color: #000;
 }
-code,
+/*code,*/
 kbd,
-pre,
+/*pre,*/
 samp {
   font-family: monospace, serif;
   font-size: 1em;
 }
-pre {
-  white-space: pre-wrap;
-}
+/*pre {*/
+  /*white-space: pre-wrap;*/
+/*}*/
 q {
   quotes: "\201C" "\201D" "\2018" "\2019";
 }
@@ -285,7 +285,7 @@ hr {
   a[href^="#"]:after {
     content: "";
   }
-  pre,
+  /*pre,*/
   blockquote {
     border: 1px solid #999;
     page-break-inside: avoid;
@@ -4166,7 +4166,7 @@ button.close {
   z-index: 1030;
   display: block;
   visibility: visible;
-  font-size: 10px;
+  font-size: 9px;
   line-height: 1.4;
   opacity: 0;
   filter: alpha(opacity=0);
@@ -4193,12 +4193,13 @@ button.close {
 }
 .tooltip-inner {
   max-width: 200px;
+  width: 80px;
   padding: 3px 8px;
   color: #ffffff;
   text-align: center;
   text-decoration: none;
   background-color: #000000;
-  border-radius: 0px;
+  border-radius: 5px;
 }
 .tooltip-arrow {
   position: absolute;

@@ -1,6 +1,6 @@
 Postscript::Application.routes.draw do
   root to: 'home#index'
-  # get '/',                  to: 'home#index', as: 'home'
+
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :sessions => "sessions" }
   resources :users
 
@@ -9,6 +9,9 @@ Postscript::Application.routes.draw do
   get '/lounge/:channel_name',     to: 'home#channel'
 
   post '/chatroom/broadcast', to: 'chatroom#broadcast'
+
+end
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -65,4 +68,4 @@ Postscript::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end
+
