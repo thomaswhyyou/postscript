@@ -58,10 +58,10 @@ development:
     # skip_version_check: false
 
     # Use Active Support's time zone in conversions. (default: true)
-    # use_activesupport_time_zone: true
+    use_activesupport_time_zone: true
 
     # Ensure all times are UTC in the app side. (default: false)
-    # use_utc: false
+    use_utc: false
 test:
   sessions:
     default:
@@ -83,4 +83,6 @@ production:
       options:
         skip_version_check: true
         safe: true
+        use_activesupport_time_zone: true
+        use_utc: false
 <% end %>

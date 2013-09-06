@@ -1,16 +1,19 @@
 class ChatroomController < ApplicationController
 
   def broadcast
-    target_channel    = params[:target_channel]
-    msg_sender        = current_user.name
-    msg_content       = params[:msg_content]
-    msg_timestamp     = Time.now.strftime('%I:%M%p')
+    target_channel              = params[:target_channel]
+    target_channel_noprefix     = params[:target_channel_noprefix].downcase
+    msg_sender                  = current_user.name
+    msg_content                 = params[:msg_content]
+
+    selected_channel = Channel.where(channel_name: target_channel_noprefix).first
+    new_msg_to_broadcast = selected_channel.feeds.create! sender: msg_sender, content: msg_content
 
     respond_to do |format|
       response = Pusher[target_channel].trigger('display_msg', {
-        msg_sender:     msg_sender,
-        msg_content:    msg_content,
-        msg_timestamp:  msg_timestamp
+        msg_sender:     new_msg_to_broadcast.sender,
+        msg_content:    new_msg_to_broadcast.content,
+        msg_timestamp:  new_msg_to_broadcast.created_at.strftime('%I:%M%p')
       })
 
       format.json { render json: response }
@@ -19,25 +22,22 @@ class ChatroomController < ApplicationController
 
   def gethistory
     target_channel_noprefix    = params[:target_channel_noprefix].downcase
-    target_channel = "presence-" + target_channel_noprefix
 
-    selected_channel = Channel.where(channel_name: target_channel_noprefix)
-    last_ten_history = selected_channel.first.feeds.desc(:created_at).limit(10)
+    selected_channel = Channel.where(channel_name: target_channel_noprefix).first
+    last_ten_history = selected_channel.feeds.desc(:created_at).limit(20)
     last_ten_history_reversed = []
 
     last_ten_history.each do |feed|
+      raw_time = feed.created_at
+      pretty_time = raw_time.strftime('%I:%M%p')
+      feed.update_attributes(pretty_time: pretty_time)
       last_ten_history_reversed.unshift(feed)
     end
 
-    binding.pry
-
     respond_to do |format|
-      response = Pusher[target_channel].trigger('display_history', {
-        last_ten_history_reversed: last_ten_history_reversed
-      })
-
-      format.json { render json: response }
+      format.json { render json: last_ten_history_reversed }
     end
+
   end
 
 end

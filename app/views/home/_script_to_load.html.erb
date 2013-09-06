@@ -1,18 +1,15 @@
-<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
 <script type="text/javascript">
-
 
   //////////////////////////////////////////////////////
   // PUSHER
   //////////////////////////////////////////////////////
 
   pusher.establish_channel = function() {
-    var current_channel_name = $('#channel_name').text();  // .replace(/^\s+|\s+$/g, "");
+    var current_channel_name = $('#channel_name').text().toLowerCase();  // .replace(/^\s+|\s+$/g, "");
     this.subscribed_channel = this.pusher_agent.subscribe("presence-" + current_channel_name);
-
     this.subscribed_channel.bind('display_msg', function(data) {
-      console.log(data);
       chatroom.display_msg(data.msg_sender, data.msg_content, data.msg_timestamp);
+      chatroom.highlight();
     });
   };
 
@@ -49,13 +46,14 @@
 
   chatroom.display_msg = function(sender, msg, time) {
     $('<div class="row col-sm-12"><div class="col-sm-2 msg_display">' + sender +
-      '</div><div class="col-sm-9"><pre msg_display>' + msg +
+      '</div><div class="col-sm-9"><pre>' + msg +
       '</pre></div><div class="col-sm-1 de_emphasized msg_display">' + time +
       '</div></div>').appendTo($('#message_board'));
   };
 
   chatroom.send_msg = function(content) {
     var target_channel = pusher.subscribed_channel.name;
+    var current_channel_name = $('#channel_name').text().toLowerCase();
     var msg_content = content;
 
     $.ajax({
@@ -63,19 +61,37 @@
       type: "post",
       dataType: "json",
       data: {"target_channel":  target_channel,
+             "target_channel_noprefix":  current_channel_name,
              "msg_content":     msg_content}
     });
   };
 
   chatroom.gethistory = function() {
-    var current_channel_name = $('#channel_name').text();
+    var current_channel_name = $('#channel_name').text().toLowerCase();
 
     $.ajax({
       url: "/chatroom/gethistory",
       type: "post",
       dataType: "json",
       data: {"target_channel_noprefix":  current_channel_name}
+    }).done(function(data) {
+      console.log(data);
+      var max_i = data.length
+      for (var i = 0; i < max_i; i++) {
+        chatroom.display_msg(data[i].sender, data[i].content, data[i].pretty_time);
+      };
+      chatroom.highlight();
+      console.log('done showing the last 10 history')
     });
-  }
+  };
+
+  chatroom.highlight = function() {
+    var all_codes = $('code');
+    var i_max = all_codes.length;
+    for (var i = 0; i < i_max; i++) {
+      hljs.highlightBlock(all_codes[i]);
+    };
+  };
 
 </script>
+

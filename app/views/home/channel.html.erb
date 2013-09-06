@@ -97,6 +97,7 @@
 <script type="text/javascript">
   $(function() {
     pusher.establish_channel();
+    chatroom.gethistory();
 
     // FOR SENDING TEXT MSG VIA CLICKING THE BUTTON
     $('#send_button').click(function(event) {
@@ -145,7 +146,7 @@
       };
     });
 
-    chatroom.gethistory();
+    hljs.initHighlightingOnLoad();
   });
 
   // Enable pusher logging - don't include this in production
