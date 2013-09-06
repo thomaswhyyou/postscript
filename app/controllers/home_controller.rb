@@ -12,8 +12,11 @@ class HomeController < ApplicationController
     # @message_types = ['text', 'code']
     @channel_name = params[:channel_name] ||= 'lounge'
     @all_channels = Channel.all
-    @pusher_key = '\'' + ENV['PUSHER_KEY'].to_s + '\''
+    # @pusher_key = '\'' + ENV['PUSHER_KEY'].to_s + '\''
     # binding.pry
+  end
+
+  def test
   end
 
 end
