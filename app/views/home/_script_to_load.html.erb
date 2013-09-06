@@ -16,11 +16,13 @@
 
     this.subscribed_channel.bind('pusher:member_added', function(member) {
       chatroom.announce_entry(member);
+      chatroom.scrolldown();
       chatroom.update_members();
     });
 
     this.subscribed_channel.bind('pusher:member_removed', function(member) {
       chatroom.announce_departure(member);
+      chatroom.scrolldown();
       chatroom.update_members();
     });
   };
