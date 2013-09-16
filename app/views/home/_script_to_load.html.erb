@@ -58,11 +58,24 @@
     return chatroom.escapeHtml(unsanitized_msg);
   };
 
+
+  // GIFS here??
+  // with an if statement
+  // so if msg ends with .gif?
+  // so if msg ends with .gif then in addition (or instead of) the pre tag it is wrapped
+  // in an img tag with msg as the src
   chatroom.display_msg = function(sender, msg, time) {
-    $('<div class="row col-sm-12"><div class="col-sm-2 msg_display">' + sender +
-      '</div><div class="col-sm-9"><pre>' + msg +
-      '</pre></div><div class="col-sm-1 de_emphasized msg_display">' + time +
-      '</div></div>').appendTo($('#message_board'));
+    if (msg.indexOf('.gif') != -1 ) {
+       $('<div class="row col-sm-12"><div class="col-sm-2 msg_display">' + sender +
+        '</div><div class="col-sm-9"><pre><img src="' + msg +
+        '" width=400 /></pre></div><div class="col-sm-1 de_emphasized msg_display">' + time +
+        '</div></div>').appendTo($('#message_board'));
+    } else {
+      $('<div class="row col-sm-12"><div class="col-sm-2 msg_display">' + sender +
+        '</div><div class="col-sm-9"><pre>' + msg +
+        '</pre></div><div class="col-sm-1 de_emphasized msg_display">' + time +
+        '</div></div>').appendTo($('#message_board'));
+    }
   };
 
   chatroom.send_msg = function(content) {
